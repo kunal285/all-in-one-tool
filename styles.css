@@ -1,0 +1,903 @@
+/* Reset & base */
+  * {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0; height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f2f5;
+    color: #222;
+  }
+  .container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+  /* Sidebar */
+  .sidebar {
+    flex-shrink: 0;
+    width: 220px;
+    background: #1E293B;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+  }
+  .sidebar h2 {
+    text-align: center;
+    margin: 0 0 1rem 0;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+  }
+  .nav-button {
+    background: none;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-left: 5px solid transparent;
+    outline-offset: 2px;
+  }
+  .nav-button:hover,
+  .nav-button:focus {
+    background: #334155;
+    border-left: 5px solid #3b82f6;
+    outline: none;
+  }
+  .nav-button.active {
+    background: #2563eb;
+    border-left: 5px solid #60a5fa;
+  }
+  /* Main content area */
+  main {
+    flex-grow: 1;
+    overflow-y: auto;
+    background: #ffffff;
+    padding: 1.5rem 2rem;
+    position: relative;
+  }
+  h1 {
+    margin-top: 0;
+  }
+  /* Tool containers */
+  .tool {
+    display: block;
+    position: absolute;
+    top: 1.5rem;
+    left: 2rem;
+    right: 2rem;
+    bottom: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    overflow-y: auto;
+    background: #fff;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  }
+  .tool.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
+  /* Scroll bar for tools */
+  .tool::-webkit-scrollbar {
+    width: 8px;
+  }
+  .tool::-webkit-scrollbar-thumb {
+    background-color: #3b82f6;
+    border-radius: 4px;
+  }
+  /* --------- Home Screen --------- */
+  #home {
+    font-size: 1.1rem;
+  }
+  #home ul {
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+  }
+  #home ul li {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #2563eb;
+  }
+  .home-hero {
+    text-align: center;
+    padding: 2rem 0;
+  }
+  .home-icon {
+    margin-bottom: 1rem;
+  }
+  .home-icon svg {
+    display: block;
+    margin: 0 auto;
+  }
+  .home-lead {
+    margin: 1rem 0;
+    font-size: 1.1rem;
+    color: #334155;
+  }
+  .home-tools-list {
+    list-style: none;
+    padding-left: 0;
+    text-align: left;
+    margin: 0 auto;
+    max-width: 300px;
+  }
+  .home-tools-list li {
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 1.5rem;
+  }
+  .home-tools-list li span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.2rem;
+  }
+  .home-footer {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #64748b;
+  }
+  /* --------- To-Do List --------- */
+  #todo {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #f8fafc;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(60, 90, 150, 0.09);
+    padding: 2rem 2.5rem 1.5rem 2.5rem;
+  }
+
+  #todo h1 {
+    color: #2563eb;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+  }
+
+  #todo input[type="text"] {
+    width: 70%;
+    padding: 0.7rem 1rem;
+    font-size: 1.1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px 0 0 7px;
+    outline: none;
+    transition: border-color 0.2s;
+    background: #fff;
+  }
+
+  #todo input[type="text"]:focus {
+    border-color: #2563eb;
+  }
+
+  #todo button.add-task-btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 1.1rem;
+    border: none;
+    background: #3b82f6;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 7px 7px 0;
+    transition: background 0.2s;
+    font-weight: 600;
+  }
+
+  #todo button.add-task-btn:hover {
+    background: #2563eb;
+  }
+
+  #todo-task-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1.2rem;
+    max-height: 320px;
+    overflow-y: auto;
+  }
+
+  #todo-task-list li {
+    background: #e0e7ef;
+    padding: 0.7rem 1rem;
+    margin: 0.4rem 0;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    transition: background 0.2s;
+    box-shadow: 0 1px 4px rgba(60,90,150,0.04);
+  }
+
+  #todo-task-list li.done {
+    text-decoration: line-through;
+    color: #94a3b8;
+    background: #f1f5f9;
+  }
+
+  #todo-task-list input[type="checkbox"] {
+    accent-color: #3b82f6;
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 0.7rem;
+    cursor: pointer;
+  }
+
+  #todo-task-list span {
+    flex: 1;
+    font-size: 1.08rem;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  #todo-task-list span:focus {
+    outline: 2px solid #2563eb;
+    background: #e0e7ff;
+  }
+
+  #todo-task-list button.delete-task {
+    background: #ef4444;
+    border: none;
+    color: white;
+    padding: 0.3rem 0.7rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: background 0.2s;
+  }
+
+  #todo-task-list button.delete-task:hover {
+    background: #b91c1c;
+  }
+  /* --------- Calculator --------- */
+  #calculator {
+    max-width: 340px;
+    margin: 2rem auto;
+    background: rgba(255,255,255,0.85);
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  #calculator h1 {
+    text-align: center;
+    color: #2563eb;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    letter-spacing: 1px;
+  }
+  #calc-display {
+    width: 100%;
+    font-size: 2.2rem;
+    text-align: right;
+    border: none;
+    background: rgba(243,244,246,0.9);
+    border-radius: 0.7rem;
+    padding: 0.7rem 1rem;
+    margin-bottom: 1.2rem;
+    color: #222;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  #calc-keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.7rem;
+  }
+  #calc-keys button {
+    font-size: 1.3rem;
+    padding: 0.9rem 0;
+    border-radius: 0.8rem;
+    border: none;
+    background: linear-gradient(180deg, #f3f4f6 70%, #e0e7ef 100%);
+    color: #222;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    cursor: pointer;
+    outline: none;
+  }
+  #calc-keys button:active {
+    background: #dbeafe;
+    transform: scale(0.97);
+  }
+  #calc-keys button.operator {
+    background: linear-gradient(180deg, #2563eb 60%, #1e40af 100%);
+    color: #fff;
+    font-weight: 600;
+  }
+  #calc-keys button.wide {
+    grid-column: span 2;
+    background: #f87171;
+    color: #fff;
+  }
+  #calc-history {
+    margin-top: 1.2rem;
+    font-size: 1rem;
+    color: #555;
+    max-height: 90px;
+    overflow-y: auto;
+    padding-left: 0.5rem;
+  }
+  #calc-history li {
+    color: #334155;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  #calc-history li:last-child {
+    border-bottom: none;
+  }
+  /* --------- Digital Clock / Timer --------- */
+  #clock #digital-clock {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    user-select: none;
+  }
+  #timer-controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  #timer-controls input[type=number] {
+    width: 80px;
+    padding: 0.5rem;
+    border-radius: 7px;
+    border: 1px solid #ccc;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+  #timer-controls button {
+    background: #3b82f6;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.6rem 1rem;
+    border-radius: 7px;
+    font-size: 1rem;
+    user-select: none;
+    transition: background 0.3s ease;
+  }
+  #timer-controls button:hover {
+    background: #2563eb;
+  }
+  #timer-status {
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+  /* --------- Weather App --------- */
+  #weather {
+    max-width: 100%;
+    width: 100%;
+    min-width: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .weather-map {
+    width: 100%;
+    min-height: 320px;
+    height: 40vh;
+    max-height: 420px;
+    margin-top: 1.5rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(60,90,150,0.07);
+  }
+  @media (max-width: 900px) {
+    .weather-map {
+      height: 260px;
+      min-height: 180px;
+    }
+    #weather {
+      padding: 1rem 0.2rem;
+    }
+  }
+  @media (max-width: 600px) {
+    .weather-map {
+      height: 180px;
+      min-height: 120px;
+    }
+  }
+  #weather input {
+    width: calc(100% - 90px);
+    padding: 0.5rem;
+    border-radius: 7px 0 0 7px;
+    border: 1px solid #ccc;
+    font-size: 1.1rem;
+  }
+  #weather button {
+    width: 90px;
+    padding: 0.5rem;
+    border-radius: 0 7px 7px 0;
+    border: none;
+    background: #3b82f6;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+  }
+  #weather button:hover {
+    background: #2563eb;
+  }
+  #weather-result {
+    margin-top: 1rem;
+    background: #e0e7ff;
+    padding: 1rem;
+    border-radius: 10px;
+  }
+  /* --------- Typing Speed Test --------- */
+  #typing p#typing-paragraph {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    background: #f8fafc;
+  }
+  #typing textarea#typing-input {
+    width: 100%;
+    height: 120px;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    resize: none;
+  }
+  #typing-result {
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+  #typing-buttons button {
+    background: #3b82f6;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 7px;
+    margin-top: 0.8rem;
+    transition: background-color 0.3s ease;
+    margin-right: 0.5rem;
+  }
+  #typing-buttons button:hover {
+    background: #2563eb;
+  }
+  /* --------- Quiz App --------- */
+  #quiz h3 {
+    margin-top: 0;
+  }
+  #quiz-question {
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  #quiz-options {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1rem;
+  }
+  #quiz-options li {
+    margin-bottom: 0.6rem;
+  }
+  #quiz-options label {
+    cursor: pointer;
+    user-select: none;
+  }
+  #quiz-buttons button {
+    background: #3b82f6;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.6rem 1.2rem;
+    border-radius: 7px;
+    margin-right: 0.8rem;
+    transition: background-color 0.3s ease;
+  }
+  #quiz-buttons button:hover {
+    background: #2563eb;
+  }
+  #quiz-score {
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+  /* --------- BMI Calculator --------- */
+  #bmi input {
+    width: 140px;
+    padding: 0.5rem;
+    margin-right: 10px;
+    border-radius: 7px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  #bmi button {
+    background: #3b82f6;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 7px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+  }
+  #bmi button:hover {
+    background: #2563eb;
+  }
+  #bmi-result {
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+  /* --------- Password Generator --------- */
+  #password-generator {
+    max-width: 400px;
+  }
+  #password-generator label {
+    display: block;
+    margin: 0.8rem 0 0.3rem 0;
+  }
+  #password-generator input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  #password-generator input[type="number"] {
+    width: 70px;
+    padding: 0.3rem;
+    margin-left: 0.3rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  #pw-output {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0.5rem;
+    font-family: monospace;
+    background: #f3f4f6;
+    border-radius: 7px;
+    border: 1px solid #ccc;
+  }
+  #pw-generate-btn {
+    margin-top: 1rem;
+    background: #3b82f6;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.6rem 1.2rem;
+    border-radius: 7px;
+    transition: background-color 0.3s ease;
+  }
+  #pw-generate-btn:hover {
+    background: #2563eb;
+  }
+  /* --------- Notes App --------- */
+  #notes textarea {
+    width: 100%;
+    height: 140px;
+    padding: 1rem;
+    border-radius: 7px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    resize: vertical;
+  }
+  #notesButtons {
+    margin-top: 0.8rem;
+  }
+  #notesButtons button {
+    background: #3b82f6;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 7px;
+    margin-right: 12px;
+    transition: background-color 0.3s ease;
+  }
+  #notesButtons button:hover {
+    background: #2563eb;
+  }
+  #notes-list {
+    margin-top: 1rem;
+    list-style-type: none;
+    padding-left: 0;
+    max-height: 250px;
+    overflow-y: auto;
+  }
+  #notes-list li {
+    background: #e2e8f0;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.6rem;
+    border-radius: 7px;
+    position: relative;
+  }
+  #notes-list li button.delete-note {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    background: #ef4444;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  #notes-list li button.delete-note:hover {
+    background: #b91c1c;
+  }
+  /* --------- Stopwatch --------- */
+  #stopwatch-display {
+    font-size: 3rem;
+    font-weight: 700;
+    user-select: none;
+    margin-bottom: 1rem;
+  }
+  #stopwatch-buttons button {
+    background: #3b82f6;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.6rem 1.2rem;
+    border-radius: 7px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+  }
+  #stopwatch-buttons button:hover {
+    background: #2563eb;
+  }
+  #laps {
+    margin-top: 1rem;
+    max-height: 150px;
+    overflow-y: auto;
+    border-top: 1px solid #ccc;
+  }
+  #laps ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0.5rem 0 0 0;
+  }
+  #laps ul li {
+    border-bottom: 1px solid #eee;
+    padding: 0.3rem 0;
+    font-family: monospace;
+  }
+
+  /* Responsive Layout for All-in-One Web Tools */
+  /* filepath: d:\va\New folder\all-in-one-web-tools\index1.html */
+
+  /* Make main container stack on small screens */
+  @media (max-width: 900px) {
+    .container {
+      flex-direction: column;
+      height: auto;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 100%;
+      flex-direction: row;
+      overflow-x: auto;
+      padding: 0.5rem 0;
+      height: auto;
+      border-radius: 0 0 12px 12px;
+    }
+    .sidebar h2 {
+      display: none;
+    }
+    .nav-button {
+      flex: 1 0 auto;
+      text-align: center;
+      border-left: none;
+      border-bottom: 3px solid transparent;
+      font-size: 0.95rem;
+      padding: 12px 10px;
+      min-width: 90px;
+      border-radius: 0;
+    }
+    .nav-button.active {
+      border-bottom: 3px solid #60a5fa;
+      background: #2563eb;
+      border-left: none;
+    }
+    main {
+      padding: 1rem 0.5rem;
+      min-height: 70vh;
+    }
+    .tool {
+      left: 0.5rem;
+      right: 0.5rem;
+      top: 1rem;
+      bottom: 1rem;
+      padding: 1rem 0.5rem;
+      border-radius: 10px;
+    }
+  }
+
+  /* Further adjustments for mobile screens */
+  @media (max-width: 600px) {
+    .container {
+      min-height: 100vh;
+    }
+    .sidebar {
+      padding: 0.2rem 0;
+      font-size: 0.95rem;
+      border-radius: 0 0 8px 8px;
+    }
+    .nav-button {
+      font-size: 0.93rem;
+      padding: 10px 4px;
+      min-width: 70px;
+    }
+    main {
+      padding: 0.5rem 0.2rem;
+    }
+    .tool {
+      left: 0.2rem;
+      right: 0.2rem;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      padding: 0.7rem 0.2rem;
+      border-radius: 7px;
+      font-size: 1rem;
+    }
+    #todo, #calculator, #weather, #bmi, #password-generator {
+      padding: 1rem 0.5rem 1rem 0.5rem;
+      max-width: 100vw;
+    }
+    #home .home-hero {
+      padding: 1.2rem 0.3rem 1.2rem 0.3rem;
+      border-radius: 10px;
+    }
+    #home .home-tools-list {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+    #typing textarea#typing-input {
+      height: 80px;
+      font-size: 1rem;
+      padding: 0.7rem;
+    }
+    #notes textarea {
+      height: 80px;
+      font-size: 1rem;
+      padding: 0.7rem;
+    }
+  }
+
+  /* Make buttons and inputs full width on very small screens */
+  @media (max-width: 420px) {
+    #todo input[type="text"], #todo button.add-task-btn,
+    #weather input, #weather button,
+    #bmi input, #bmi button,
+    #password-generator input[type="number"], #password-generator button {
+      width: 100% !important;
+      margin: 0.2rem 0 !important;
+      border-radius: 7px !important;
+      display: block;
+    }
+    #todo input[type="text"] {
+      border-radius: 7px 7px 0 0 !important;
+    }
+    #todo button.add-task-btn {
+      border-radius: 0 0 7px 7px !important;
+    }
+  }
+
+  /* Ensure scrollbars are touch-friendly */
+  .tool::-webkit-scrollbar {
+    width: 10px;
+  }
+  .tool::-webkit-scrollbar-thumb {
+    background-color: #3b82f6;
+    border-radius: 6px;
+  }
+
+  /* Make sure text and buttons are never too small */
+  body, input, button, textarea {
+    font-size: 1rem;
+  }
+
+  /* Prevent horizontal scroll */
+  html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* --- Dark Mode Styles --- */
+body.dark-mode, html.dark-mode {
+  background: #181f2a !important;
+  color: #e5e7eb !important;
+}
+body.dark-mode .container,
+html.dark-mode .container {
+  background: #181f2a !important;
+}
+body.dark-mode main,
+html.dark-mode main {
+  background: #232b39 !important;
+}
+body.dark-mode .sidebar {
+  background: #111827 !important;
+  color: #e5e7eb !important;
+}
+body.dark-mode .nav-button {
+  color: #e5e7eb !important;
+}
+body.dark-mode .nav-button.active,
+body.dark-mode .nav-button:hover,
+body.dark-mode .nav-button:focus {
+  background: #2563eb !important;
+  color: #fff !important;
+}
+body.dark-mode .tool {
+  background: #232b39 !important;
+  color: #e5e7eb !important;
+  box-shadow: 0 0 16px rgba(0,0,0,0.25);
+}
+body.dark-mode input,
+body.dark-mode textarea {
+  background: #1e293b !important;
+  color: #e5e7eb !important;
+  border-color: #334155 !important;
+}
+body.dark-mode button,
+body.dark-mode #theme-toggle {
+  background: #2563eb !important;
+  color: #fff !important;
+}
+body.dark-mode #calc-display {
+  background: #1e293b !important;
+  color: #fff !important;
+}
+body.dark-mode #calc-keys button {
+  background: linear-gradient(180deg, #334155 70%, #1e293b 100%) !important;
+  color: #e5e7eb !important;
+}
+body.dark-mode #calc-keys button.operator {
+  background: linear-gradient(180deg, #60a5fa 60%, #2563eb 100%) !important;
+  color: #fff !important;
+}
+body.dark-mode #calc-keys button.wide {
+  background: #ef4444 !important;
+  color: #fff !important;
+}
+body.dark-mode #calc-history li {
+  color: #cbd5e1 !important;
+  border-bottom: 1px solid #334155 !important;
+}
+body.dark-mode #todo-task-list li {
+  background: #334155 !important;
+  color: #e5e7eb !important;
+}
+body.dark-mode #todo-task-list li.done {
+  background: #232b39 !important;
+  color: #64748b !important;
+}
+body.dark-mode #weather-result {
+  background: #334155 !important;
+  color: #e5e7eb !important;
+}
+body.dark-mode #notes-list li {
+  background: #334155 !important;
+  color: #e5e7eb !important;
+}
+body.dark-mode #laps ul li {
+  color: #cbd5e1 !important;
+}
+body.dark-mode #stopwatch-display {
+  color: #60a5fa !important;
+}
+body.dark-mode #bmi-result,
+body.dark-mode #typing-result,
+body.dark-mode #quiz-score {
+  color: #60a5fa !important;
+}
+body.dark-mode .weather-map {
+  filter: brightness(0.8) contrast(1.1);
+}
+body.dark-mode ::selection {
+  background: #2563eb;
+  color: #fff;
+}

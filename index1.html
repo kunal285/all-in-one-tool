@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>All-in-One Web Tools</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container" role="main">
+    <nav class="sidebar" aria-label="Tools navigation">
+      <h2>Tools</h2>
+      <button class="nav-button active" aria-pressed="true" aria-controls="home" id="btn-home" onclick="switchTool('home')">Home</button>
+      <button class="nav-button" aria-pressed="false" aria-controls="todo" id="btn-todo" onclick="switchTool('todo')">To-Do List</button>
+      <button class="nav-button" aria-pressed="false" aria-controls="calculator" id="btn-calculator" onclick="switchTool('calculator')">Calculator</button>
+      <button class="nav-button" aria-pressed="false" aria-controls="clock" id="btn-clock" onclick="switchTool('clock')">Clock & Timer</button>
+      <button class="nav-button" aria-pressed="false" aria-controls="weather" id="btn-weather" onclick="switchTool('weather')">Weather</button>
+      <button class="nav-button" aria-pressed="false" aria-controls="typing" id="btn-typing" onclick="switchTool('typing')">Typing Speed Test</button>
+      <button class="nav-button" aria-pressed="false" aria-controls="quiz" id="btn-quiz" onclick="switchTool('quiz')">Quiz App</button>
+      <button class="nav-button" aria-pressed="false" aria-controls="bmi" id="btn-bmi" onclick="switchTool('bmi')">BMI Calculator</button>
+      <button class="nav-button" aria-pressed="false" aria-controls="password-generator" id="btn-password" onclick="switchTool('password-generator')">Password Generator</button>
+      <button class="nav-button" aria-pressed="false" aria-controls="notes" id="btn-notes" onclick="switchTool('notes')">Notes App</button>
+      <button class="nav-button" aria-pressed="false" aria-controls="stopwatch" id="btn-stopwatch" onclick="switchTool('stopwatch')">Stopwatch</button>
+    </nav>
+    <main>
+      <!-- Home Screen -->
+      <section class="tool active" id="home" tabindex="0" aria-label="Home Screen">
+        <div class="home-hero">
+          <div class="home-icon">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="2" width="20" height="20" rx="6" fill="#3b82f6"/>
+              <path d="M8 8h8v8H8z" fill="#fff"/>
+              <circle cx="12" cy="12" r="2.5" fill="#2563eb"/>
+            </svg>
+          </div>
+          <h1>All-in-One Web Tools</h1>
+          <p class="home-lead">
+            Boost your productivity and have fun with a suite of handy web tools.<br>
+            Everything you need, all in one place.
+          </p>
+       <ul class="home-tools-list>
+  <li onclick="switchTool('todo')" tabindex="0" role="button" aria-label="To-Do List"><span>📝</span> To-Do List</li>
+  <li onclick="switchTool('calculator')" tabindex="0" role="button" aria-label="Calculator"><span>🧮</span> Calculator</li>
+  <li onclick="switchTool('clock')" tabindex="0" role="button" aria-label="Clock & Timer"><span>⏰</span> Clock & Timer</li>
+  <li onclick="switchTool('weather')" tabindex="0" role="button" aria-label="Weather"><span>🌦️</span> Weather</li>
+  <li onclick="switchTool('typing')" tabindex="0" role="button" aria-label="Typing Speed Test"><span>⌨️</span> Typing Speed Test</li>
+  <li onclick="switchTool('quiz')" tabindex="0" role="button" aria-label="Quiz App"><span>❓</span> Quiz App</li>
+  <li onclick="switchTool('bmi')" tabindex="0" role="button" aria-label="BMI Calculator"><span>⚖️</span> BMI Calculator</li>
+  <li onclick="switchTool('password-generator')" tabindex="0" role="button" aria-label="Password Generator"><span>🔑</span> Password Generator</li>
+  <li onclick="switchTool('notes')" tabindex="0" role="button" aria-label="Notes App"><span>🗒️</span> Notes App</li>
+  <li onclick="switchTool('stopwatch')" tabindex="0" role="button" aria-label="Stopwatch"><span>⏱️</span> Stopwatch</li>
+</ul>
+          <div class="home-footer">
+            <span>Created by <a href="mailto:kunalgavit285@gmail.com">Kunal Gavit</a></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- To-Do List -->
+      <section class="tool" id="todo" tabindex="0" aria-label="To-Do List Tool">
+        <h1>To-Do List</h1>
+        <div>
+          <input type="text" id="todo-task-input" aria-label="New task" placeholder="Add a new task" />
+          <button class="add-task-btn" aria-label="Add task" onclick="addTask()">Add</button>
+        </div>
+        <ul id="todo-task-list" aria-live="polite" aria-relevant="additions removals"></ul>
+      </section>
+
+      <!-- Calculator -->
+      <section class="tool" id="calculator" tabindex="0" aria-label="Calculator Tool">
+        <h1>Calculator</h1>
+        <input type="text" id="calc-display" aria-label="Calculator display" disabled value="0" />
+        <div id="calc-keys" role="group" aria-label="Calculator keys">
+          <button type="button" data-key="7">7</button>
+          <button type="button" data-key="8">8</button>
+          <button type="button" data-key="9">9</button>
+          <button type="button" data-key="/" class="operator" aria-label="Divide">÷</button>
+          <button type="button" data-key="4">4</button>
+          <button type="button" data-key="5">5</button>
+          <button type="button" data-key="6">6</button>
+          <button type="button" data-key="*" class="operator" aria-label="Multiply">×</button>
+          <button type="button" data-key="1">1</button>
+          <button type="button" data-key="2">2</button>
+          <button type="button" data-key="3">3</button>
+          <button type="button" data-key="-" class="operator" aria-label="Subtract">−</button>
+          <button type="button" data-key="0">0</button>
+          <button type="button" data-key=".">.</button>
+          <button type="button" data-key="=" class="operator" aria-label="Equals">=</button>
+          <button type="button" data-key="+" class="operator" aria-label="Add">+</button>
+          <button type="button" data-key="C" class="operator wide" aria-label="Clear">C</button>
+        </div>
+        <ul id="calc-history" style="margin-top:1.2rem; padding-left:0; list-style:none;"></ul>
+      </section>
+
+      <!-- Clock & Timer -->
+      <section class="tool" id="clock" tabindex="0" aria-label="Digital Clock and Timer Tool">
+        <h1>Digital Clock & Timer</h1>
+        <div id="digital-clock" aria-live="polite" aria-atomic="true" aria-label="Current time">00:00:00</div>
+        <div id="timer-controls" aria-label="Timer controls">
+          <input type="number" id="timer-minutes" min="0" max="60" step="1" placeholder="Min" aria-label="Timer minutes" />
+          <input type="number" id="timer-seconds" min="0" max="59" step="1" placeholder="Sec" aria-label="Timer seconds" />
+          <button id="start-timer-btn" aria-label="Start timer">Start</button>
+          <button id="pause-timer-btn" aria-label="Pause timer" disabled>Pause</button>
+          <button id="reset-timer-btn" aria-label="Reset timer" disabled>Reset</button>
+        </div>
+        <div id="timer-status" aria-live="assertive" aria-atomic="true" style="margin-top:1rem;font-weight:bold;"></div>
+      </section>
+
+      <!-- Weather -->
+      <section class="tool" id="weather" tabindex="0" aria-label="Weather Tool">
+        <h1>Weather</h1>
+        <p>Type a city and get current weather info:</p>
+        <div>
+          <input type="text" id="weather-city-input" aria-label="City name" placeholder="Enter city" />
+          <button id="get-weather-btn" aria-label="Get weather">Get</button>
+        </div>
+        <div id="weather-result" role="region" aria-live="polite" style="margin-top: 1rem;"></div>
+        <div id="weather-map" class="weather-map"></div>
+        <h3 style="margin-top:1.5rem;">Searched Cities</h3>
+        <ul id="weather-history" style="list-style:none; padding-left:0;"></ul>
+      </section>
+
+      <!-- Typing Speed Test -->
+      <section class="tool" id="typing" tabindex="0" aria-label="Typing Speed Test Tool">
+        <h1>Typing Speed Test</h1>
+        <p id="typing-paragraph"></p>
+        <textarea id="typing-input" aria-label="Typing input" placeholder="Start typing here..." disabled></textarea>
+        <div id="typing-buttons">
+          <button id="start-typing-btn">Start Test</button>
+          <button id="reset-typing-btn" disabled>Reset</button>
+        </div>
+        <div id="typing-result" aria-live="polite" style="margin-top:1rem;font-weight:bold;"></div>
+      </section>
+
+      <!-- Quiz App -->
+      <section class="tool" id="quiz" tabindex="0" aria-label="Quiz Tool">
+        <h1>Quiz App</h1>
+        <div id="quiz-container">
+          <h3 id="quiz-question"></h3>
+          <ul id="quiz-options"></ul>
+          <div id="quiz-buttons">
+            <button id="quiz-next-btn" disabled>Next</button>
+            <button id="quiz-restart-btn" style="display:none;">Restart</button>
+          </div>
+          <div id="quiz-score" style="margin-top:1rem; font-weight:600;"></div>
+        </div>
+      </section>
+
+      <!-- BMI Calculator -->
+      <section class="tool" id="bmi" tabindex="0" aria-label="BMI Calculator Tool">
+        <h1>BMI Calculator</h1>
+        <label for="bmi-weight">Weight (kg): </label>
+        <input type="number" id="bmi-weight" min="0" placeholder="e.g. 70" aria-label="Weight in kilograms" />
+        <label for="bmi-height">Height (cm): </label>
+        <input type="number" id="bmi-height" min="0" placeholder="e.g. 175" aria-label="Height in centimeters" />
+        <button id="bmi-calc-btn">Calculate</button>
+        <div id="bmi-result" aria-live="polite" style="margin-top:1rem; font-weight: bold;"></div>
+      </section>
+
+      <!-- Password Generator -->
+      <section class="tool" id="password-generator" tabindex="0" aria-label="Password Generator Tool">
+        <h1>Password Generator</h1>
+        <label>
+          <input type="checkbox" id="pw-lowercase" checked />
+          Include lowercase
+        </label>
+        <label>
+          <input type="checkbox" id="pw-uppercase" checked />
+          Include uppercase
+        </label>
+        <label>
+          <input type="checkbox" id="pw-numbers" checked />
+          Include numbers
+        </label>
+        <label>
+          <input type="checkbox" id="pw-symbols" />
+          Include symbols
+        </label>
+        <label for="pw-length">Length:</label>
+        <input type="number" id="pw-length" min="6" max="64" value="16" aria-label="Password length" />
+        <button id="pw-generate-btn">Generate Password</button>
+        <input type="text" id="pw-output" aria-label="Generated password" readonly />
+      </section>
+
+      <!-- Notes App -->
+      <section class="tool" id="notes" tabindex="0" aria-label="Notes App Tool">
+        <h1>Notes</h1>
+        <textarea id="note-input" placeholder="Write something..."></textarea>
+        <div id="notesButtons">
+          <button id="save-note-btn">Save Note</button>
+          <button id="clear-note-btn">Clear</button>
+        </div>
+        <ul id="notes-list" aria-live="polite" aria-relevant="additions removals"></ul>
+      </section>
+
+      <!-- Stopwatch -->
+      <section class="tool" id="stopwatch" tabindex="0" aria-label="Stopwatch Tool">
+        <h1>Stopwatch</h1>
+        <div id="stopwatch-display" aria-live="polite">00:00:00.00</div>
+        <div id="stopwatch-buttons">
+          <button id="sw-start-btn">Start</button>
+          <button id="sw-stop-btn" disabled>Stop</button>
+          <button id="sw-reset-btn" disabled>Reset</button>
+          <button id="sw-lap-btn" disabled>Lap</button>
+        </div>
+        <div id="laps">
+          <ul id="laps-list"></ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Add this toggle button at the top of your body or in your sidebar/header -->
+<button id="theme-toggle" aria-label="Toggle dark mode" style="position:fixed;top:18px;right:18px;z-index:9999;padding:0.6em 1.2em;border-radius:2em;border:none;background:#2563eb;color:#fff;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.08);cursor:pointer;">
+  🌙 Dark Mode
+</button>
+
+<script src="quiz.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
+
+<!-- This is a simple HTML template for an all-in-one web tool application. It includes various tools like a To-Do List, Calculator, Clock & Timer, Weather, Typing Speed Test, Quiz App, BMI Calculator, Password Generator, Notes App, and Stopwatch. Each tool is implemented with basic functionality and can be expanded further. The layout is responsive and designed to work on both desktop and mobile devices. -->
