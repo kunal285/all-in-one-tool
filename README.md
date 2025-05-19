@@ -20,22 +20,9 @@ This project is a single-page application that includes a variety of web tools b
 ```
 all-in-one-web-tools
 ├── index.html
-├── css
-│   └── styles.css
-├── js
-│   ├── main.js
-│   ├── todo.js
-│   ├── calculator.js
-│   ├── clock-timer.js
-│   ├── weather.js
-│   ├── typing-test.js
-│   ├── quiz.js
-│   ├── bmi.js
-│   ├── password-generator.js
-│   ├── notes.js
-│   └── stopwatch.js
-├── assets
-│   └── (optional: icons or SVGs)
+│── styles.css
+│── main.js
+│── quiz.js
 └── README.md
 ```
 
